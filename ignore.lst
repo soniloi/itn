@@ -1,0 +1,5 @@
+hostmask	definitely@ignore.me	exception1	exception2	exception3
+nick	ChanServ
+nick	OperServ
+nick	SeenServ
+

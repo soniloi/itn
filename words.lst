@@ -1,0 +1,41 @@
+smilies_happy	:)	:D	:3	=)	=D	=3
+smilies_vhappy	\o/	\o\	/o/	:')	:'D	=')	='D
+smilies_sad	:(	D:	=(	D=
+smilies_vsad	;_;	;-;	;;	tirz	:'(	D':	='(	D'=	T_T
+smilies_grim	:|	:/	:s	:S	:<	:]	:[	=|	=/	=s	=S	=<	=[
+smilies_sarcastic	:P	=]	=P
+smilies_surprised	:o	:O	=o	=O
+smilies_angry	:@	>:(	D:<	=@	>=(	D=<
+smilies_evil	>:)	>:D	>=)	>=D
+smilies_sleazy	;)	;D	;P	rawr
+profanities	arse	arsehole	arseholes	asshole	assholes	assmunch	assmunches	bitch	bitches	bollocking	bollocks	bollix	bollox	clunge	crap	cunt	cunts	damn	dammit	damnit	dickface	dickfaces	dickhead
+profanities	dickheads	dickloaf	dickwad	dickwads	fo	fuck	fucken	fucker	fuckers	fuckhead	fuckheads	fuckwit	fuckwits	fucking	fukn	fuq	fuque
+profanities	gobshite	gobshites	mofo	mofos	motherfucker	motherfuckers	motherfucking	shit	shitbiscuit	shitbiscuits	shite	shites	shitstain	shitstains	shitty	wanker	wankers	wankstain	wankstains
+languages	abap	ada	agda	algol	applescript	arm	awk	bash	brainfuck	c	c++	c#	clojure	cobol	coldfusion	delphi	eiffel	erlang	f#
+languages	fortran	golang	groovy	haskell	j++	java	javascript	lisp	lua	matlab	mips	modula	modula-2	modula-3 objective-c	ocaml
+languages	pascal	perl	php	pl/o	pl/c	pl/i	pl/sql	powershell	processing	prolog	promela	python	r++	risc-i	ruby	rust
+languages	scala	scheme	sed	simula	smalltalk	sparc	verilog	vhdl	vb	x86	xquery
+like_preceding	<3	adore	adored	enjoy	enjoyed	liked	love	loved	prefer	preferred
+like_succeeding	<3	:)	:D
+like_predicated	<3	amazing	amazeballs	awesome	beautiful	excellent	fantastic	great	lovely	wonderful
+hate_preceding	</3	awful	despise	despised	dislike	disliked	fuck	fucken	fucking	fukn	hate	hated	horrible	ugh
+hate_succeeding	</3	;_;	:(	D:	sucks	sux
+hate_predicated	</3	;_;	awful	dreadful	gross	horrendous	horrible	horrific	ugly
+confirmers	absolutely	actually	fucking	I	kinda	quite	rather	really	sorta
+deniers	don't	never	not
+copula	is
+indicators_dictator	//:#|	\\:#|	>:#|	//:#O	\\:#O	>:#O	auschwitz	axis	book-burning	dominate	domination	duce	fuhrer	gestapo	gulag
+indicators_dictator	gulags	heil	kampf	kgb	overlord	propaganda	reich	swastika	takeover
+suggestors_dictator	o/	\o	o>	<o	army	coup	general	gitmo	guantanamo	guard	guards	internment	interrogate	interrogation	jawohl	major
+suggestors_dictator	march	officer	police	power	power-hungry	rule	salute	salutes	ss	subvert	subversion	subversive
+indicators_gryffindor	brave	braver	bravery	courage	courageous	griffindor	gryffindor	lion	lions	
+indicators_hufflepuff	badger	badgers	hufflepuff
+indicators_ravenclaw	:<	:V	eagle	eagles	ravenclaw
+indicators_slytherin	>:D	>:)	evil	slither	slitherin	slytherin	snake	snakes
+suggestors_gryffindor	\o/	o/	\o	:|	^5	adventure	awesome	danger	dangerous	daring	determination	determined	fire
+suggestors_gryffindor	greatness	hero	heroic	heroine	hooray	hurrah	hurray	mission	pride	proud	quest	red	valiant	yay	yus
+suggestors_hufflepuff	<3	kind	kindness	loyal	loyalty	nice	patience	patient	toil	weed	yellow
+suggestors_ravenclaw	academic	air	blue	book	books	citation	clever	grade	grades	grey	intellect intellectual	intelligent	intelligence
+suggestors_ravenclaw	read	reading	smart	study	wisdom	wit
+suggestors_slytherin	>:(	:@	>.>	<.<	>_>	<_<	ambition	ambitious	blood	bloody	coffin	cunning	dark	dungeon	dungeons	green	kill	killing
+suggestors_slytherin	menace	menacing	morbid	murder	overlord	powerful	ruthless	takeover	wicked

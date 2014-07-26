@@ -15,7 +15,20 @@
 *.a
 *.lib
 
-# Executables
+# Executables/scripts
 *.exe
 *.out
 *.app
+*.sh
+ircst
+
+# Input/output files
+*.log
+*.out
+
+# Run-specific list files
+ignore.lst
+merge.lst
+
+# Other
+output/

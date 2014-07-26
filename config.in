@@ -1,0 +1,132 @@
+##############################################################################
+# This config file is split into three sections:
+#	1. Input specification: stuff that should be configured according to how the files being parsed are formatted
+#	2. Semantic specification: preferences about the cutoff levels etc. to use when putting together various statistics
+#	3. Output specification: stuff about how output should be formatted
+# Anything from '#' to the end of a line is ignored, unless it is within double-quotes
+# Denote single characters between single-quotes e.g. 'a'
+# Denote strings between double-quotes e.g. "orange"
+# Denote numerals without any start or end markers, decimal format only
+# No escape characters in strings
+# If a key is found more than once, the last instance seen will be taken as its value
+##############################################################################
+
+##############################################################################
+# 1. Input specification
+##############################################################################
+
+# Filenames
+filename_ignore = "ignore.lst" # Name of file containing list of servers/hostmasks/users to ignore
+filename_merge = "merge.lst" # Name of file containing list of users to merge
+filename_words = "words.lst" # Name of file containing word categories
+filename_out_default = "results.out" # Default filename to write results to if none specified
+filename_path_separator = '/' # Character used to separate directories in filepaths
+
+# Line types
+mark_info = '-' # First character in a sequence indicating some channel status change e.g. -!- mollusc was kicked from #sea by shark
+mark_me = '*' # Character denoting action, i.e. /me stuff e.g. * mollusc jumps for joy
+
+# Timestamp interpretation
+time_hasopen = 0 # Whether there is an opening marker before the timestamp
+time_hasclose = 0 # Whether there is a closing marker after the timestamp
+time_open = '(' # Symbol marking start of timestamp
+time_close = ')' # Symbol marking end of timestamp
+time_length = 8 # The number of characters in the timestamp, excluding opening/closing markers
+time_separator_info = ':' # Character separating hours/minitus/seconds in timestamp on information line e.g. "--- Log opened Wed May 01 00:00:27"
+time_separator_other = '.' # Character separating hours/minutes/seconds in timestamp on normal line
+time_has_seconds = 1 # Whether the timestamp has seconds
+
+# Nick interpretation
+nick_hasopen = 1 # Whether there is an opening marker before the nick
+nick_hasclose = 1 # Whether there is a closing marker after the nick
+nick_length_max = 16 # Maximum number of characters in a nick
+nick_open = '[' # Symbol marking the start of a nick
+nick_close = ']' # Symbol marking the end of a nick
+nick_invalid = " @%+*" # ASCII characters that are not valid for nicks
+
+# Hostmask stuff
+hostmask_open = '[' # Symbol marking the start of a hostmask e.g. -!- mollusc [mollusc@oce.an] has quit
+hostmask_close = ']' # Symbol marking the end of a hostmask
+
+# Mode stuff
+mode_max_changes = 4 # The largest number of mode-changes that can be made per line e.g. -!- mode/#sea [+vvvv cod whale dolphin seahorse] by mollusc
+
+# Information line stuff
+info_tokens_before_date = 4 # The number of tokens that will appear before we are to parse the date, e.g. "--- Log opened Wed May 01 00:00:27", "--- Day changed Thu May 02 2013" mean 4
+
+# Information substrings: be VERY careful about how spaces are placed; the reason they are done this way is because without the spaces, sometimes the words searched for might be mistaken for nicks, or parts of nicks
+info_log = "Log " # Indicates log open/close
+info_daychange = "Day changed" # Indicates day change
+info_topicchange = " changed the topic of " # Denotes topic change
+info_topicchange_to = " to: " # The bit that comes after the above string and the channel name
+info_nickchange = " is now known as " # Denotes nick change
+info_join = " has joined " # Denotes joins
+info_part = " has left " # Denotes parts
+info_quit = " has quit " # Denotes quits
+info_kill = " [Killed " # Denotes kills
+info_kick = " was kicked from " # Denotes kick
+info_modechange = " mode/" # Denotes channel or user mode change
+info_changeby = " by " # What appears between kicks/mode changes and the nick of whoever performed them
+
+##############################################################################
+# 2. Semantic specification
+##############################################################################
+
+# Word stuff
+wordcount_cutoff = 2 # The minimum number of times a user uses a word before we consider it a disproportionate user word
+wordcount_users = 3 # The maximum number of users that may say a word before it is no longer considered uncommon
+wordcount_excluded = 550 # Maximum number of words to exclude as "too common"
+word_valid_punctuation = "-'" # Characters that are considered valid to find within words
+word_valid_delimiters = " .,!?;:()[]{}<>~*/" # Characters that are considered valid separators of words NB TABS AND DOUBLE-QUOTES ARE A PROBLEM BECAUSE THEY CANNOT BE ESCAPED HERE
+
+# Language stuff
+lang_modifier_topup = 21 # How many points to increment/decrement a quantity by if a modifier has been found
+lang_min_favourite = 3 # How many favouriting points constitute a language favourite (a good value is (lang_modifier_topup>>3)+1)
+
+# Dictator stuff
+dictator_indicator_value = 43 # Number of points to add to user's dictator count for saying an indicator word or performing an indicator action
+dictator_suggestor_value = 26 # Number of points to add to a user's dictator count for saying a suggestor word or performing an indicator action
+dictator_speech_minimum = 11 # If someone says a line with this many words or more, they are making a speech => more likely to be a dictator
+dictator_speech_value = 1 # Number of points to add to user's dictator count for every additional word in a speech
+
+# House stuff
+house_indicator_value = 13 # Number of points to a house a user gets for saying an indicator word for that house
+house_suggestor_value = 2 # Number of points to a house a user gets for saying a suggestor word for that house
+
+# Bot stuff
+bot_cutoff = 24 # The lowest bot% to bother printing in the most-likely-to-be-bots section
+bot_linecount_cutoff = 4 # The number of lines a user must say before they may be considered for botishness
+bot_proximity_0_seconds = 0 # Proximity of line in seconds to previous line, nearest level
+bot_proximity_1_seconds = 1 # Proximity of line in seconds to previous line, second-nearest level
+bot_proximity_2_seconds = 2
+bot_proximity_3_seconds = 3
+bot_proximity_0_value = 14 # Value to add to bot-count if line at nearest proximity
+bot_proximity_1_value = 12
+bot_proximity_2_value = 10
+bot_proximity_3_value = 8
+bot_triggers = "!>~^$@£&*#?<" # Common triggers for bots
+bot_trigger_value = 16 # Value to add to bot-count if line immediately follows one that contained a common bot-trigger
+
+##############################################################################
+# 3. Output specification
+##############################################################################
+
+# Output styling
+out_section_divider = "-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------" # Used to graphically separate sections of statistics when they are outputted
+out_list_open = '{' # Character to use to start a list
+out_list_close = '}' # Character to use to close a list
+out_clarify_open = '(' # Character to use to open a clarifying remark
+out_clarify_close = ')' # Character to use to close a clarifying remark
+out_words_per_line = 15 # The number of words to print on a single line (when printing large lists of words)
+out_date_separator = '/' # Character to separate days from months and months from years when printing dates
+out_time_separator = '.' # Character to separate hours from minutes and minutes from seconds when printing timestamps
+
+# Various list sizes
+size_list_short = 12 # Used for individual user characteristics
+size_list_medium = 24 # Used for things like pairs of user interactions
+size_list_long = 225 # Used for word statistics
+size_list_topics = 12 # Number of recent topics to print
+
+# Numerical display
+decimal_places_to_print 2 # When printing floats
+
