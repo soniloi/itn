@@ -480,48 +480,51 @@ void UserCollection::finaliseAttributes(){
 		countmap utokens = u->getTokens();
 		
 		for(countmap::iterator jt = utokens.begin(); jt != utokens.end(); jt++){
-			if(this->cats->isHappy(jt->first))
+			if(this->cats->isInCategory(KEY_CAT_SMILIES_HAPPY, jt->first) ||
+				this->cats->isInCategory(KEY_CAT_SMILIES_VHAPPY, jt->first))
 				u->addToCount(KEY_ATTR_HAPPY, jt->second);
-			if(this->cats->isSad(jt->first))
+			if(this->cats->isInCategory(KEY_CAT_SMILIES_SAD, jt->first) ||
+				this->cats->isInCategory(KEY_CAT_SMILIES_VSAD, jt->first))
 				u->addToCount(KEY_ATTR_SAD, jt->second);
-			if(this->cats->isGrim(jt->first))
+
+			if(this->cats->isInCategory(KEY_CAT_SMILIES_GRIM, jt->first))
 				u->addToCount(KEY_ATTR_GRIM, jt->second);
-			if(this->cats->isSarcastic(jt->first))
+			if(this->cats->isInCategory(KEY_CAT_SMILIES_SARCASTIC, jt->first))
 				u->addToCount(KEY_ATTR_SARCASTIC, jt->second);
-			if(this->cats->isSurprised(jt->first))
+			if(this->cats->isInCategory(KEY_CAT_SMILIES_SURPRISED, jt->first))
 				u->addToCount(KEY_ATTR_SURPRISED, jt->second);
-			if(this->cats->isAngry(jt->first))
+			if(this->cats->isInCategory(KEY_CAT_SMILIES_ANGRY, jt->first))
 				u->addToCount(KEY_ATTR_ANGRY, jt->second);
-			if(this->cats->isEvil(jt->first))
+			if(this->cats->isInCategory(KEY_CAT_SMILIES_EVIL, jt->first))
 				u->addToCount(KEY_ATTR_EVIL, jt->second);
-			if(this->cats->isSleazy(jt->first))
+			if(this->cats->isInCategory(KEY_CAT_SMILIES_SLEAZY, jt->first))
 				u->addToCount(KEY_ATTR_SLEAZY, jt->second);
-			if(this->cats->isProfanity(jt->first))
+			if(this->cats->isInCategory(KEY_CAT_PROFANITIES, jt->first))
 				u->addToCount(KEY_ATTR_PROFANITY, jt->second);
-				
-			if(this->cats->isDictatorIndicator(jt->first))
+
+			if(this->cats->isInCategoryIgnoreCase(KEY_CAT_INDICATORS_DICTATOR, jt->first))
 				u->addToCount(KEY_ATTR_DICTATOR, (jt->second)*dictator_indicator_value);
-			else if(this->cats->isDictatorSuggestor(jt->first))
+			else if(this->cats->isInCategoryIgnoreCase(KEY_CAT_SUGGESTORS_DICTATOR, jt->first))
 				u->addToCount(KEY_ATTR_DICTATOR, (jt->second)*dictator_suggestor_value);
 
-			if(this->cats->isGryffindorIndicator(jt->first))
-				u->addToCount(KEY_ATTR_GRYFFINDOR, (jt->second)*house_indicator_value);				
-			else if(this->cats->isHufflepuffIndicator(jt->first))
-				u->addToCount(KEY_ATTR_HUFFLEPUFF, (jt->second)*house_indicator_value);
-			else if(this->cats->isRavenclawIndicator(jt->first))
-				u->addToCount(KEY_ATTR_RAVENCLAW, (jt->second)*house_indicator_value);
-			else if(this->cats->isSlytherinIndicator(jt->first))
-				u->addToCount(KEY_ATTR_SLYTHERIN, (jt->second)*house_indicator_value);
-				
-			else if(this->cats->isGryffindorSuggestor(jt->first))
+			if(this->cats->isInCategoryIgnoreCase(KEY_CAT_INDICATORS_GRYFFINDOR, jt->first))
+				u->addToCount(KEY_ATTR_GRYFFINDOR, (jt->second)*house_indicator_value);
+			else if(this->cats->isInCategoryIgnoreCase(KEY_CAT_SUGGESTORS_GRYFFINDOR, jt->first))
 				u->addToCount(KEY_ATTR_GRYFFINDOR, (jt->second)*house_suggestor_value);
-			else if(this->cats->isHufflepuffSuggestor(jt->first))
+			else if(this->cats->isInCategoryIgnoreCase(KEY_CAT_INDICATORS_HUFFLEPUFF, jt->first))
+				u->addToCount(KEY_ATTR_HUFFLEPUFF, (jt->second)*house_indicator_value);
+			else if(this->cats->isInCategoryIgnoreCase(KEY_CAT_SUGGESTORS_HUFFLEPUFF, jt->first))
 				u->addToCount(KEY_ATTR_HUFFLEPUFF, (jt->second)*house_suggestor_value);
-			else if(this->cats->isRavenclawSuggestor(jt->first))
+
+			else if(this->cats->isInCategoryIgnoreCase(KEY_CAT_INDICATORS_RAVENCLAW, jt->first))
+				u->addToCount(KEY_ATTR_RAVENCLAW, (jt->second)*house_indicator_value);
+			else if(this->cats->isInCategoryIgnoreCase(KEY_CAT_SUGGESTORS_RAVENCLAW, jt->first))
 				u->addToCount(KEY_ATTR_RAVENCLAW, (jt->second)*house_suggestor_value);
-			else if(this->cats->isSlytherinSuggestor(jt->first))
+			else if(this->cats->isInCategoryIgnoreCase(KEY_CAT_INDICATORS_SLYTHERIN, jt->first))
+				u->addToCount(KEY_ATTR_SLYTHERIN, (jt->second)*house_indicator_value);
+			else if(this->cats->isInCategoryIgnoreCase(KEY_CAT_SUGGESTORS_SLYTHERIN, jt->first))
 				u->addToCount(KEY_ATTR_SLYTHERIN, (jt->second)*house_suggestor_value);
-		}		
+		}
 	}
 }
 

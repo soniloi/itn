@@ -86,172 +86,23 @@ bool WordCategories::isValidWord(string str, string word_valid_punctuation){
 	return true;
 }
 
-/* Determine whether a string denotes "happy" */
-bool WordCategories::isHappy(string word){
-	set<string> s = this->categories["smilies_happy"];
-	if(s.find(word) != s.end())
-		return true;
-	s = this->categories["smilies_vhappy"];
+/* Return whether a word is in a particular category */
+bool WordCategories::isInCategory(string category, string word){
+	set<string> s = this->categories[category];
 	return(s.find(word) != s.end());
 }
 
-/* Determine whether a string denotes "sad" */
-bool WordCategories::isSad(string word){
-	set<string> s = this->categories["smilies_sad"];
-	if(s.find(word) != s.end())
-		return true;
-	s = this->categories["smilies_vsad"];
-	return(s.find(word) != s.end());
-}
-
-/* Determine whether a string denotes "grim" */
-bool WordCategories::isGrim(string word){
-	set<string> s = this->categories["smilies_grim"];
-	return(s.find(word) != s.end());
-}
-
-/* Determine whether a string denotes "sarcastic" */
-bool WordCategories::isSarcastic(string word){
-	set<string> s = this->categories["smilies_sarcastic"];
-	return(s.find(word) != s.end());
-}
-
-/* Determine whether a string denotes "surprised" */
-bool WordCategories::isSurprised(string word){
-	set<string> s = this->categories["smilies_surprised"];
-	return(s.find(word) != s.end());
-}
-
-/* Determine whether a string denotes "angry" */
-bool WordCategories::isAngry(string word){
-	set<string> s = this->categories["smilies_angry"];
-	return(s.find(word) != s.end());
-}
-
-/* Determine whether a string denotes "evil" */
-bool WordCategories::isEvil(string word){
-	set<string> s = this->categories["smilies_evil"];
-	return(s.find(word) != s.end());
-}
-
-/* Determine whether a string denotes "sleazy" */
-bool WordCategories::isSleazy(string word){
-	set<string> s = this->categories["smilies_sleazy"];
-	return(s.find(word) != s.end());
-}
-
-/* Determine whether a string is a profanity */
-bool WordCategories::isProfanity(string word){
-	set<string> s = this->categories["profanities"];
-	return(s.find(word) != s.end());
-}
-
-/* Return whether a string is the name of a programming language */
-bool WordCategories::isLanguage(string word){
-	return containsIgnoreCase(this->categories["languages"], word);
-}
-
-/* Return whether a string is one that preceding another would indicate liking that other */
-bool WordCategories::isPrecedingLike(string word){
-	return containsIgnoreCase(this->categories["like_preceding"], word);
-}
-
-/* Return whether a string is one that succeeding another would indicate liking that other */
-bool WordCategories::isSucceedingLike(string word){
-	return containsIgnoreCase(this->categories["like_succeeding"], word);
-}
-
-/* Return whether a string is an adjective indicating liking */
-bool WordCategories::isPredicatedLike(string word){
-	return containsIgnoreCase(this->categories["like_predicated"], word);
-}
-
-/* Return whether a string is one that preceding another would indicate disliking that other */
-bool WordCategories::isPrecedingHate(string word){
-	return containsIgnoreCase(this->categories["hate_preceding"], word);
-}
-
-/* Return whether a string is one that succeeding another would indicate disliking that other */
-bool WordCategories::isSucceedingHate(string word){
-	return containsIgnoreCase(this->categories["hate_succeeding"], word);
-}
-
-/* Return whether a string is an adjective indicating hating */
-bool WordCategories::isPredicatedHate(string word){
-	return containsIgnoreCase(this->categories["hate_predicated"], word);
-}
-
-/* Return whether a string is a confirmer of the following statement */
-bool WordCategories::isConfirmer(string word){
-	return containsIgnoreCase(this->categories["confirmers"], word);
-}
-
-/* Return whether a string is a denier of the following statement */
-bool WordCategories::isDenier(string word){
-	return containsIgnoreCase(this->categories["deniers"], word);
-}
-
-/* Return whether a string is a copula */
-bool WordCategories::isCopula(string word){
-	return containsIgnoreCase(this->categories["copula"], word);
-}
-
-/* Return whether a string is indicative of someone who is a dictator */
-bool WordCategories::isDictatorIndicator(string word){
-	return containsIgnoreCase(this->categories["indicators_dictator"], word);
-}
-
-/* Return whether a string is suggestive of someone who is a dictator */
-bool WordCategories::isDictatorSuggestor(string word){
-	return containsIgnoreCase(this->categories["suggestors_dictator"], word);
-}
-
-/* Return whether a string is indicative of someone in Gryffindor */
-bool WordCategories::isGryffindorIndicator(string word){
-	return containsIgnoreCase(this->categories["indicators_gryffindor"], word);
-}
-
-/* Return whether a string is indicative of someone in Hufflepuff */
-bool WordCategories::isHufflepuffIndicator(string word){
-	return containsIgnoreCase(this->categories["indicators_hufflepuff"], word);
-}
-
-/* Return whether a string is indicative of someone in Ravenclaw */
-bool WordCategories::isRavenclawIndicator(string word){
-	return containsIgnoreCase(this->categories["indicators_ravenclaw"], word);
-}
-
-/* Return whether a string is indicative of someone in Slytherin */
-bool WordCategories::isSlytherinIndicator(string word){
-	return containsIgnoreCase(this->categories["indicators_slytherin"], word);
-}
-
-/* Return whether a string is suggestive of someone in Gryffindor */
-bool WordCategories::isGryffindorSuggestor(string word){
-	return containsIgnoreCase(this->categories["suggestors_gryffindor"], word);
-}
-
-/* Return whether a string is suggestive of someone in Hufflepuff */
-bool WordCategories::isHufflepuffSuggestor(string word){
-	return containsIgnoreCase(this->categories["suggestors_hufflepuff"], word);
-}
-
-/* Return whether a string is suggestive of someone in Ravenclaw */
-bool WordCategories::isRavenclawSuggestor(string word){
-	return containsIgnoreCase(this->categories["suggestors_ravenclaw"], word);
-}
-
-/* Return whether a string is suggestive of someone in Slytherin */
-bool WordCategories::isSlytherinSuggestor(string word){
-	return containsIgnoreCase(this->categories["suggestors_slytherin"], word);
+/* Return whether a word is in a particular category */
+bool WordCategories::isInCategoryIgnoreCase(string category, string word){
+	set<string> s = this->categories[category];
+	return containsIgnoreCase(s, word);
 }
 
 /* Compare two strings for equality, ignoring case
  * Returns:	-1 if the first string is smaller
  *			 0 if the strings are equal
  *			+1 if the first string is greater
- * Effective only insofar as tolower is effective (i.e. basically only ASCII strings)
- */
+ * Effective only insofar as tolower is effective (i.e. basically only ASCII strings) */
 int WordCategories::compareIgnoreCase(string first, string second){
 	unsigned int i;
 	for(i = 0; first[i] != '\0' && second[i] != '\0'; i++){

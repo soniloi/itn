@@ -95,7 +95,7 @@ void User::addLine(stringvectorpair wordsandtokens, string type, int content, Wo
 			string lang(*it);
 			transform(lang.begin(), lang.end(), lang.begin(), ::tolower);
 			
-			if(cats->isLanguage(lang)){
+			if(cats->isInCategory(KEY_CAT_LANGUAGES, lang)){
 
 				//cout << endl << line << endl;
 
@@ -104,13 +104,13 @@ void User::addLine(stringvectorpair wordsandtokens, string type, int content, Wo
 				// Check for context in the word immediately before
 				vector<string>::reverse_iterator jt(it);
 				if(jt != tokens.rend()){
-					
-					if(cats->isPrecedingLike((*jt))){
+
+					if(cats->isInCategory(KEY_CAT_LIKE_PRECEDING, (*jt))){
 						jt++;
 						if(jt != tokens.rend()){ // Check in case there is a preceding modifier
-							if(cats->isConfirmer((*jt))) // "I like Prolog", "really like c#"
+							if(cats->isInCategory(KEY_CAT_CONFIRMERS, (*jt))) // "I like Prolog", "really like c#"
 								this->languagefavourites[lang] += lang_modifier_topup;
-							else if(cats->isDenier((*jt))) // "don't like haskell", "never enjoy ruby"
+							else if(cats->isInCategory(KEY_CAT_DENIERS, (*jt))) // "don't like haskell", "never enjoy ruby"
 								this->languagefavourites[lang] -= lang_modifier_topup;
 							else{
 								this->languagefavourites[lang] += (lang_modifier_topup>>1);
@@ -120,14 +120,15 @@ void User::addLine(stringvectorpair wordsandtokens, string type, int content, Wo
 							this->languagefavourites[lang] += (lang_modifier_topup>>1);
 						}
 					}
-					else if(cats->isPrecedingHate((*jt))){
+
+					else if(cats->isInCategory(KEY_CAT_HATE_PRECEDING, (*jt))){
 						jt++;
 						if(jt != tokens.rend()){ // Check for preceding modifier
-							if(cats->isConfirmer((*jt))){ // "I hate Java", "really dislike haskell"
+							if(cats->isInCategory(KEY_CAT_CONFIRMERS, 	(*jt))){ // "I hate Java", "really dislike haskell"
 								this->languagefavourites[lang] -= lang_modifier_topup;
 				        this->languagefavourites[lang]--; // Offset the one that was already added
 							}
-							else if(cats->isDenier((*jt))){ // "don't dislike c#" (not exactly a ringing endorsement)
+							else if(cats->isInCategory(KEY_CAT_DENIERS, (*jt))){ // "don't dislike c#" (not exactly a ringing endorsement)
 								this->languagefavourites[lang] += (lang_modifier_topup>>1);
 							}
 							else{
@@ -135,31 +136,28 @@ void User::addLine(stringvectorpair wordsandtokens, string type, int content, Wo
 		        		this->languagefavourites[lang]--; // Offset the one that was already added
 							}
 						}
-						else{
+						else
 							this->languagefavourites[lang] -= (lang_modifier_topup>>1);
-						}
-
 					}
-
 				}
 
 				// Check for context in the word immediately after
 				vector<string>::iterator kt = it;
 				kt++;
 				if(kt != tokens.end()){
-					
-					if(cats->isSucceedingLike((*kt)))
+
+					if(cats->isInCategory(KEY_CAT_LIKE_SUCCEEDING, (*kt)))
 						this->languagefavourites[lang] += (lang_modifier_topup>>1);
-					else if(cats->isSucceedingHate((*kt))){
+					else if(cats->isInCategory(KEY_CAT_HATE_SUCCEEDING, (*kt))){
 						this->languagefavourites[lang] -= (lang_modifier_topup>>1);
 						this->languagefavourites[lang]--; // Offset the one that was already added
 					}
-					else if(cats->isCopula((*kt))){ // "Prolog is ..."
+					else if(cats->isInCategory(KEY_CAT_COPULA, (*kt))){ // "Prolog is ..."
 						kt++;
 						if(kt != tokens.end()){
-							if(cats->isPredicatedLike((*kt)))
+							if(cats->isInCategory(KEY_CAT_LIKE_PREDICATED, (*kt)))
 								this->languagefavourites[lang] += (lang_modifier_topup);
-							else if(cats->isPredicatedHate((*kt))){
+							else if(cats->isInCategory(KEY_CAT_HATE_PREDICATED, (*kt))){
 								this->languagefavourites[lang] -= (lang_modifier_topup);
 								this->languagefavourites[lang]--; // Offset the one that was already added
 							}
@@ -170,13 +168,11 @@ void User::addLine(stringvectorpair wordsandtokens, string type, int content, Wo
 
 			}
 		}
-	}	
+	}
 }
 
-/*
- *	Return the count of a particular attribute
- *	key parameter is the name of the attribute
- */
+/* Return the count of a particular attribute
+ * key parameter is the name of the attribute */
 int User::getCount(string key){
 	return this->counts[key];
 }
