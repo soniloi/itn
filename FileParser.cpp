@@ -201,6 +201,11 @@ void FileParser::adjustStats(string fileignore, string filemerge){
 
 	cout << endl << "---> Performing adjustments ..." << endl;
 
+	//this->users->printUsers(); // Uncomment this to print the user container before adjustments completed
+	//this->users->printMothballs(); // Uncomment this to print mothballed users before adjustments completed
+
+	this->users->unmothballAll(); // Merge mothballed users back into master collection
+
 	// Search for users to ignore
 	ifstream ignore;
 	ignore.open(fileignore.c_str());
@@ -277,7 +282,7 @@ void FileParser::writeStats(string fileout, int contentVectors){
 
 	results << std::fixed << std::setprecision(decimal_places_to_print);
 
-	//this->users->printUsers(results); // Uncomment this to print the user container after adjustments completed
+	//this->users->printUsers(); // Uncomment this to print the user container after adjustments completed
 
 	if(contentVectors & CONTENT_FLAGS_B){ // (Conditionally) write out basic channel statistics
 		results << endl << section_divider << endl << endl;

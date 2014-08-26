@@ -155,6 +155,33 @@ void UserCollection::insertUser(string key, User* user){
 	this->setKey(user, k);
 }
 
+/* Mothball an existing user, and remove them from existing collection */
+void UserCollection::mothball(string key, User* user){
+	string k(key);
+	transform(k.begin(), k.end(), k.begin(), ::tolower);
+	this->removeKey(k);
+	this->mothballs.insert(nickuserpair(k, user)); // We'll have to go back to collect them later
+}
+
+/* Unmothball all mothballed users by merging them back into existing collection */
+void UserCollection::unmothballAll(){
+	cout << endl;
+	for(usermultimap::iterator it = this->mothballs.begin(); it != this->mothballs.end(); it++){
+		usermap::iterator jt = this->users.find(it->first); // Search for user with this nick/key in usermap
+		cout << "\tUnmothballing: " << it->first << "\tat: " << std::hex << it->second << std::dec;
+		cout << "\tcurrent: " << it->second->getNick();
+		cout << "\talias: {" << it->second->aliasesToString() << " }";
+
+		if(jt != this->users.end())
+			this->mergeUsers(jt->second, it->second);
+		else
+			this->insertUser(it->first, it->second);
+
+		cout << endl;
+	}
+	cout << endl;
+}
+
 /* Search for a user by hostmask
  * This searches the userlist due to practicality
  * Clearly slower than searching by nick, but this is mitigated by
@@ -307,6 +334,14 @@ void UserCollection::insertNickChange(string line, int index){
 		ghost->setNick(nicknew); // FIXME: Should this be necessary?
 		this->deleteByKey(nickold);
 	}
+	else{ // That very annoying case where someone changes nick to the nick of someone who used to be in the channel but no longer is
+		this->mothball(nicknew, ghost); // We'll have to go back to collect them later
+		user->setIn(true);
+		ghost->setIn(false);
+		this->removeKey(nickold);
+		this->insertUser(nicknew, user);
+	}
+
 }
 
 /* Get user from an accidental line, which contains both nick and hostmask information */
@@ -593,10 +628,20 @@ User* UserCollection::getMostRateByWordCount(string key){
 	return highest;
 }
 
-void UserCollection::printUsers(ofstream& results){
+void UserCollection::printMothballs(){
+	cout << endl << "Mothballed:" << endl;
+	for(usermultimap::iterator it = this->mothballs.begin(); it != this->mothballs.end(); it++){
+		cout << "key: " << it->first << "\tvalue: " << std::hex << it->second << std::dec;
+		cout << "\tcurrent: " << it->second->getNick();
+		cout << "\talias: { " << it->second->aliasesToString() << " }" << endl;
+	}
+}
+
+void UserCollection::printUsers(){
 	for(usermap::iterator it = this->users.begin(); it != this->users.end(); it++){
 		cout << "key: " << it->first << "\tvalue: " << std::hex << it->second << std::dec;
-		cout << "\tcurrent nick: " << it->second->getNick() << endl;
+		cout << "\tcurrent: " << it->second->getNick();
+		cout << "\talias: { " << it->second->aliasesToString() << " }" << endl;
 	}
 }
 

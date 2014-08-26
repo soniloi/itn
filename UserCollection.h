@@ -17,12 +17,15 @@
 #include "UserPairComparators.h"
 
 typedef std::map<std::string, User*> usermap;
+typedef std::multimap<std::string, User*> usermultimap;
+typedef std::pair<std::string, User*> nickuserpair;
 
 class UserCollection{
 
 private:
 	WordCategories * cats; // Pointer to word category structure
 	usermap users; // Map from current nick to pointer to User object
+	usermultimap mothballs; // A temporary place to push users out to if there is a nick clash
 
 	void amalgamateProperties(User* toUser, User* fromUser);
 	void mergeUsers(User* toUser, User* fromUser);
@@ -42,7 +45,8 @@ private:
 	void deleteByValue(User* value);
 	User* getOrCreateUserByNick(std::string nick);
 	void insertUser(std::string key, User* user);
-	
+	void mothball(std::string key, User* user);
+
 	std::set<std::string> ignorednicks;
 	std::set<std::pair<std::string, int> > ignoredhostmasks;
 
@@ -73,13 +77,16 @@ public:
 	void insertLeave(std::string line, int index, std::string type);
 	void insertKick(std::string line, int index);
 	void insertModeChange(std::string line, int index);
+
+	void unmothballAll();
 	void finaliseAttributes();
 
 	int countUsers();
 	void printList();
 	void mergeUsersByNick(std::vector<std::string> nicks);
 
-	void printUsers(std::ofstream& results); // Basically just a debugging tool
+	void printMothballs(); // Basically just a debugging tool
+	void printUsers(); // Basically just a debugging tool
 	void writeServers(std::ofstream& results);
 	void writeLineTotals(std::ofstream& results);
 	void writeWordTotals(std::ofstream& results, std::list<std::string> ordered);
